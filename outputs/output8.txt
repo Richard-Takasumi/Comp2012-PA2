@@ -1,0 +1,15 @@
+Current step: 3
+======================
+|                    |
+|                    |
+|                    |
+|      W       W     |
+|          S         |
+|                    |
+|      W       W     |
+|                    |
+|                    |
+|                    |
+======================
+Total Entity count: 5
+Entity count: 5
