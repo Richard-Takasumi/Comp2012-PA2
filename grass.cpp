@@ -74,23 +74,29 @@ void Grass::update(Grid* nextGrid) {
     if (countdown(this->spreadCounter, this->getSpreadCooldown())) {
         int adjX_up = getX() + getAdjX(3);
         int adjY_up = getY() + getAdjY(3);
+        this->putClone(nextGrid, adjX_up, adjY_up);
 
         int adjX_down = getX() + getAdjX(5);
         int adjY_down = getY() + getAdjY(5);
+        this->putClone(nextGrid, adjX_down, adjY_down);
 
         int adjX_left = getX() + getAdjX(1);
         int adjY_left = getY() + getAdjY(1);
+        this->putClone(nextGrid, adjX_left, adjY_left);
 
         int adjX_right = getX() + getAdjX(7);
         int adjY_right = getY() + getAdjY(7);
+        this->putClone(nextGrid, adjX_right, adjY_right);
 
+        //place copy on x, y of nextgrid
+        this->putSelf(nextGrid, this->getX(), this->getY());
 
-        
         // Place copy of grass on x,y of itself
         // place grass on all four sides
 
     } else {
-        // Just plae copy of grass on x, y of itself
+        // Just place copy of grass on x, y of itself
+        this->putSelf(nextGrid, this->getX(), this->getY());
     }
 
 }

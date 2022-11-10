@@ -14,6 +14,19 @@
  * Otherwise, if current cell contains an Animal, delete the passed animal and return false.
 */
 bool Animal::putAnimal(Animal* animal, Grid* nextGrid, const int x, const int y) const {
+
+
+    // if not out of bounds, and the cell is not an Animal.
+    if (!nextGrid->outOfBounds(x,y) && (nextGrid->getCell(x,y) == nullptr || nextGrid->getCell(x, y)->toChar() == '.')) {
+        
+        // set cell will delete the cell if it's grass anyway, so no need to call deleteCell()
+        nextGrid->setCell(animal, x, y);  
+        return true; 
+    } else {
+        // if the animal should not be put there, we must delete animal parameter because
+        // in order to call putAnimal function we must create a new animal, which won't be used.
+        delete animal;
+    }
     
     return false;
 }
@@ -95,8 +108,10 @@ void Animal::update(Grid* nextGrid) {
     // Otherwise, the animal tries to eat
     if (countdown(hungerCounter, getHungerCooldown())) {
         // ?
+        return;
     }
     else {
+        eat(nextGrid);
         // ?
     }
   
@@ -104,6 +119,7 @@ void Animal::update(Grid* nextGrid) {
     if (breedCounter == 1) {
         if (hungerCounter / static_cast<float>(getHungerCooldown()) > 0.7f) {
             // ?
+            breed(nextGrid);
         }
     }
     else {
@@ -113,8 +129,10 @@ void Animal::update(Grid* nextGrid) {
     // Animal finally moves if move cooldown is reached
     if (countdown(moveCounter, getMoveCooldown())) {
         // ?
+        move(nextGrid);
     }
     else {
         // ?
+        putSelf(nextGrid, getX(), getY());
     }
 }
