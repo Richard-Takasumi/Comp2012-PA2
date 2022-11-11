@@ -16,6 +16,7 @@ int main() {
             return 0;
         }
     }
+   
     
     for (int y = 0; y < BOARD_SIZE_H; ++y) {
         std::cin.getline(input, sizeof(input));

@@ -18,6 +18,8 @@ bool putGrass(Grass* grass, Grid* nextGrid, const int x, const int y) {
     if (!nextGrid->outOfBounds(x,y) && nextGrid->getCell(x,y) == nullptr) {
         nextGrid->setCell(grass, x, y);  
         return true; 
+    } else {
+        delete grass;
     }
 
     return false;
@@ -38,10 +40,7 @@ void Grass::putSelf(Grid* nextGrid, const int x, const int y) {
     Grass* grass_copy = new Grass(*this);
     if (putGrass(grass_copy, nextGrid, x, y)) {
         this->setNextSelf(grass_copy);
-    } else {
-        delete grass_copy;
-    }
-    
+    } 
 
 }
 
@@ -55,9 +54,7 @@ void Grass::putSelf(Grid* nextGrid, const int x, const int y) {
 */
 void Grass::putClone(Grid* nextGrid, const int x, const int y) const {
     Grass* new_grass = new Grass(this->getBoard());
-    if (putGrass(new_grass, nextGrid, x, y) == false) {
-        delete new_grass;
-    }
+    putGrass(new_grass, nextGrid, x, y);
 
 }
 

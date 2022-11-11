@@ -10,6 +10,14 @@
  * Hint: putAnimal() can be used.
 */
 void Sheep::putSelf(Grid* nextGrid, const int x, const int y) {
+
+    Sheep* sheep_copy = new Sheep(*this);
+    
+
+    // putAnimal will delete sheep_copy if the put is unsuccessful
+    if (putAnimal(sheep_copy, nextGrid, x, y)) {
+        this->setNextSelf(sheep_copy);
+    } 
     
 }
 
@@ -21,7 +29,9 @@ void Sheep::putSelf(Grid* nextGrid, const int x, const int y) {
  * Hint: putAnimal() can be used.
 */
 void Sheep::putClone(Grid* nextGrid, const int x, const int y) const {
-    
+    Sheep* new_sheep = new Sheep(this->getBoard());
+    // putAnimal will delete new_sheep if the put is unsuccessful
+    putAnimal(new_sheep, nextGrid, x, y);
 }
 
 /**
@@ -47,6 +57,15 @@ void Sheep::eat(Grid* nextGrid) {
         }
 
         // ?
+
+        // if adjEntity is grass, remove it from the next grid, then.... eat it?
+        if (adjEntity->toChar() == '.' && !adjEntity->isRemoved()) {
+            adjEntity->removeSelf(nextGrid);
+            this->setHungerCounter(this->getHungerCooldown());
+            return;
+        }
+
+
     }
 }
 
@@ -74,6 +93,25 @@ void Sheep::breed(Grid* nextGrid) {
         }
 
         // ?
+        // if found a sheep, and the sheep is not removed? I don't think it hurts to check...
+        if (adjEntity->toChar() == 'S' && !adjEntity->isRemoved()) {
+
+
+            // random_index prequalifies the tile, meaning it is either grass or empty.
+            int random_index = getRandomMovementIndex(nextGrid);
+            // if no cells are available.
+            if (random_index == -1) {
+                return;
+            }
+            int put_baby_sheep_X = getX() + getAdjX(random_index);
+            int put_baby_sheep_Y = getY() + getAdjY(random_index);
+
+            putClone(nextGrid, put_baby_sheep_X, put_baby_sheep_Y);
+            // reset breedCounter to MAX == breedCooldown();
+            this->setBreedCounter(this->getBreedCooldown());
+            return;
+
+        }
     }
 }
 
@@ -85,5 +123,20 @@ void Sheep::breed(Grid* nextGrid) {
  * Otherwise, place it in the current position.
 */
 void Sheep::move(Grid* nextGrid) {
+    int random_index = getRandomMovementIndex(nextGrid);
+    // if all adjacent tiles are full, just stay still.
+    if (random_index == -1) {
+        putSelf(nextGrid, this->getX(), this->getY());
+        return;
+    }
+
+
+    int move_sheep_X = getX() + getAdjX(random_index);
+    int move_sheep_Y = getY() + getAdjY(random_index);
+    putSelf(nextGrid, move_sheep_X, move_sheep_Y);
+
+
+
+
     
 }
