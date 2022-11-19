@@ -16,7 +16,7 @@
 bool Animal::putAnimal(Animal* animal, Grid* nextGrid, const int x, const int y) const {
 
 
-    // if not out of bounds, and the cell is not an Animal.
+    // if not out of bounds, and the cell is empty OR a grass
     if (!nextGrid->outOfBounds(x,y) && (nextGrid->getCell(x,y) == nullptr || nextGrid->getCell(x, y)->toChar() == '.')) {
         
         // set cell will delete the cell if it's grass anyway, so no need to call deleteCell()

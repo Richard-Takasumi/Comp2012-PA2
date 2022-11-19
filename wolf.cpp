@@ -177,17 +177,17 @@ void Wolf::move(Grid* nextGrid) {
         else if (closest_sheep_X == curr_wolf_X) {
             // up or down?
             // if wolf is to the below the sheep, move up
-            std::cout << "same column" << std::endl;
+            // std::cout << "same column" << std::endl;
             if (curr_wolf_Y > closest_sheep_Y) {
-                std::cout << "same column-1" << std::endl;
+                // std::cout << "same column-1" << std::endl;
                 move_to_X = this->getX();
-                move_to_Y = this->getY() + getAdjX(3);
+                move_to_Y = this->getY() + getAdjY(3);
             }
             // if wolf is to the above the sheep, move down
             else if (curr_wolf_Y < closest_sheep_Y) {
-                std::cout << "same column-2" << std::endl;
+                // std::cout << "same column-2" << std::endl;
                 move_to_X = this->getX();
-                move_to_Y = this->getY() + getAdjX(5);
+                move_to_Y = this->getY() + getAdjY(5);
 
             } 
             else {
@@ -240,14 +240,12 @@ void Wolf::move(Grid* nextGrid) {
 
             // for some reason putSelf is not being called on columns, 
             // need to test
-            on rows
-
 
             // Adjacent cell is not an animal, can move over
             if ( !(dynamic_cast<Animal*>(adjEntity)) && !(dynamic_cast<Animal*>(adjNextEntity)) ){
-                std::cout << "Wolf x: " << this->getX() << " Wolf y: " << this->getY() << std::endl; 
+                // std::cout << "Wolf x: " << this->getX() << " Wolf y: " << this->getY() << std::endl; 
                 // std::cout << "Sheep x: " << closest_sheep_X << " Sheep y: " << closest_sheep_Y << std::endl; 
-                std::cout << "move to  x: " << move_to_X << " move to y: " << move_to_Y << std::endl; 
+                // std::cout << "move to  x: " << move_to_X << " move to y: " << move_to_Y << std::endl; 
                 
                 putSelf(nextGrid, move_to_X, move_to_Y);
                 return;

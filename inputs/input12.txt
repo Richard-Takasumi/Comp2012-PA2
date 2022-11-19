@@ -1,13 +1,13 @@
 ======================
-|               W    |
-|               W....|
-|               W....|
-|               W    |
-|          S    W    |
-|               W    |
-|               W    |
-|               W....|
-|               W    |
-|               W    |
+|   WWWWWWWWWWWWW    |
+|   W   SSS     W....|
+|   W    ...    W....|
+| SSW      .    W    |
+| ..W   S  S.  SW    |
+|   W   .....   W    |
+|   W   S       W    |
+|   W     S    SW....|
+|   W...........WSSSS|
+|   WWWWWWWWSWWWWSSSS|
 ======================
 3
